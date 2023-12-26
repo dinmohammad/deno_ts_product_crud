@@ -74,13 +74,13 @@ export default {
                 status: requestBody.status
             }
             // console.log(product)
-            await ProductService.update(product);
-            if(ProductService){
-                response.status = 200;
-                response.body=product;
+            const data = await ProductService.update(product);
+            if(!data){
+                response.status = 500;
+                response.body = { message: "Failed product update. No 'id' Found data Record" };
             }else{
-                response.status = 400;
-                response.body = { message: "Failed product update" };
+                response.status = 200;
+                response.body = { message: "Successfully update product", data: product };
             }
         } catch (error) {
             console.log(error);
