@@ -37,7 +37,13 @@ export default {
         
     },
     delete: async(id: any) => {
-        const result = await db.query("DELETE FROM Products WHERE id = ?", [id])
-        return result;
+        const isCheck_data = await db.query(`select * from Products WHERE id = ?`, [id]);
+        console.log(isCheck_data)
+        if(isCheck_data.length == 0){
+            return null;
+        }else{
+            const result = await db.query("DELETE FROM Products WHERE id = ?", [id])
+            return result;
+        }
     }
 }

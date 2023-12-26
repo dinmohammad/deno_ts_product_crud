@@ -94,10 +94,11 @@ export default {
             const product = await ProductService.delete(params.id);
             if(product){
                 response.status = 200;
-                response.body=product;
+                response.body = { message: "Successfully Delete" };
+
             }else{
                 response.status = 404;
-                response.body = { message: "Failed Successfully Delete" };
+                response.body = { message: "Failed Successfully Delete, User not exit" };
             }
         } catch (error) {
             console.log(error)
