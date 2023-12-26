@@ -18,11 +18,31 @@ export default {
             }
             // console.log(newData)
             await ProductService.create(newData);
-            response.status = 200;
-            response.body=newData;
+            if(ProductService){
+                response.status = 200;
+                response.body=newData;
+            }else{
+                response.status = 400;
+                response.body = { message: "Failed product create" };
+            }
         } catch (error) {
             console.log(error);
         }
-    }
+    },
+
+    getAllProduct: async ({ response }: { response: any }) => {
+        try {
+            const products = await ProductService.findAll();
+            if(products){
+                response.status = 200;
+                response.body=products;
+            }else{
+                response.status = 400;
+                response.body = { message: "No found products" };
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }   
 
 }

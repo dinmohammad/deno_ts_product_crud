@@ -9,4 +9,8 @@ export default {
         );
         return result;
     },
+    findAll: async () => {
+        const result = await db.query(`select * from Products`);
+        return result;
+    },
 }

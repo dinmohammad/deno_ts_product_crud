@@ -8,5 +8,8 @@ const router = new Router();
 //     response.body = {"message": "Hello Akash valo"};
 // })
 
-export default router.post('/create-product', ProductController.createProduct)
+router.post('/create-product', ProductController.createProduct)
+    .get('/get-product', ProductController.getAllProduct)
+
+export default router
 
