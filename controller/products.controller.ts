@@ -87,5 +87,23 @@ export default {
         }
     },
 
+    deleteProduct: async (
+        { response, params }: { response: any; params: {id : string} }
+    ) => {
+        try {
+            const product = await ProductService.delete(params.id);
+            if(product){
+                response.status = 200;
+                response.body=product;
+            }else{
+                response.status = 404;
+                response.body = { message: "Failed Successfully Delete" };
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+
 
 }

@@ -24,5 +24,9 @@ export default {
             [data.productName, data.productDes, data.created_at, data.status, data.id],
         );
         return result;
+    },
+    delete: async(id: any) => {
+        const result = await db.query("DELETE FROM Products WHERE id = ?", [id])
+        return result;
     }
 }
