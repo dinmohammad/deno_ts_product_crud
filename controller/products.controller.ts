@@ -43,6 +43,49 @@ export default {
         } catch (error) {
             console.log(error)
         }
-    }   
+    },
+    getByIdProduct: async (
+        { response, params }: { response: any; params: {id : string} }
+    ) => {
+        try {
+            const product = await ProductService.findById(params.id);
+            if(product){
+                response.status = 200;
+                response.body=product;
+            }else{
+                response.status = 400;
+                response.body = { message: "No found product" };
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    updateProduct: async ({ request, response, params }: { request: any; response: any, params: any }) => {
+        const body = await request.body({ type: 'json' });
+        const requestBody = await body.value;
+        // console.log(requestBody)
+        
+        try {
+            let product: productsModel =  {
+                id: params.id,
+                productName: requestBody.productName,
+                productDes: requestBody.productDes,
+                created_at: requestBody.created_at  !== null ? requestBody.created_at : nowDate.toISOString(),
+                status: requestBody.status
+            }
+            // console.log(product)
+            await ProductService.update(product);
+            if(ProductService){
+                response.status = 200;
+                response.body=product;
+            }else{
+                response.status = 400;
+                response.body = { message: "Failed product update" };
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
 
 }

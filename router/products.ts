@@ -10,6 +10,8 @@ const router = new Router();
 
 router.post('/create-product', ProductController.createProduct)
     .get('/get-product', ProductController.getAllProduct)
+    .get('/get-by-id-product/:id', ProductController.getByIdProduct)
+    .put('/update-product/:id', ProductController.updateProduct)
 
 export default router
 
